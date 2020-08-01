@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="search-box">
+      <input type="text" placeholder="Search here..." />
+    </div>
+
+    <div class="nav-container">
+      <div class="wrapper">
+        <nav>
+          <div class="logo">
+            P&R
+          </div>
+
+          <ul class="nav-items">
+            <li>
+              <a href="#">Contact other Owners</a>
+            </li>
+
+            <li>
+              <a href="#">Customise your Dog walk</a>
+            </li>
+
+            <li>
+              <a href="#">Places to Go</a>
+            </li>
+
+            <li>
+              <a class="nav-btn-container" href="#">
+                <img class="search-btn" src="images/search-icon.svg" alt="" />
+                <img class="close-btn" src="images/close-icon.svg" alt="" />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+        <div id="googlemaps"></div>
+
+        <div class="header-container">
+            <head>
+                <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
+            
+                <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
+                <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+                <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/searchbar/latest/searchbar.js"></script>
+              </head>
+              
+              <body>
+              <div style="position: absolute">
+                <div id="widget-container" class="wrld-widget-container"></div>
+                <div id="map" 
+                
+              style="height: 600px">
+                </div>
+            
+                <script>
+                  var map = L.Wrld.map("map", "your_api_key_here", {
+                    center: [37.79505, -122.40815],
+                    zoom: 15
+                  });
+            
+                  var searchbarConfig = {
+                      apiKey: "your_api_key_here",
+                      outdoorSearchMenuItems: [
+                          {name: "Around Me", searchTag: "", iconKey: "aroundme"},
+                          {name: "Tourism", searchTag: "tourist_info", iconKey: "tourist_info"}
+                      ],
+                      locationJumps: [
+                          {name: "Auckland", latLng: [37.7952, -122.4028]}
+                      ]
+                  };
+                  var searchbar = new WrldSearchbar("widget-container", map, searchbarConfig);
+                  searchbar.on("searchresultsclear", clearMarkers);
+                  searchbar.on("searchresultsupdate", addSearchResultMarkers);
+                  searchbar.on("searchresultselect", openSelectedResultPopup);
+            
+                  var markers = [];
+            
+                  function clearMarkers() {
+                      markers.forEach(function(marker) { marker.remove(); });
+                  }
+            
+                  function addSearchResultMarkers(event) {
+                      clearMarkers();
+                      for (var poiId in event.results) {
+                          var result = event.results[poiId];
+                          var marker = L.marker(result.location.latLng, { title: result.title });
+                          marker.addTo(map);
+                          markers.push(marker);
+                      }
+                  }
+            
+                  function openSelectedResultPopup(event) {
+                      map.openPopup(event.result.title, event.result.location.latLng);
+                  }
+                </script>
+            
+              </div>
+        
+        
+        <div id="contactform"> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.944937477904!2d174.758462366422!3d-36.84379474785686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47f420b07ccd%3A0x754b09a7cddaa7cf!2sGridAKL%20%2F%20John%20Lysaght!5e0!3m2!1sen!2snz!4v1596282741228!5m2!1sen!2snz" width="4000" height="3000" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div>
+
+
+      <div class="wrapper">
+        
+
+
+        <header>
+          <div class="hero-content"></div>
+            <h1>welcome</h1>
+            <p>
+              
+            </p>
+            <a href="#">
+              Contact Us
+            </a>
+          </div>
+
+          <div class="hero-image">
+            <img src="images/photo.png" alt="" />
+            <div class="photo-bg"></div>
+          </div>
+        </header>
+
+        <div class="social-icons">
+          <a href="#">
+            <img src="images/instagram-logo.png" alt="" />
+          </a>
+          <a href="#">
+            <img src="images/behance-logo.png" alt="" />
+          </a>
+          <a href="#">
+            <img src="images/dribbble-logo.png" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
